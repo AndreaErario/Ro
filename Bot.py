@@ -37,4 +37,4 @@ async def on_message(message):
             await client.send_message(message.channel, "Scusa amico, non hai il permesso")
 
 
-client.run(os.getenv"TOKEN")
+client.run(os.getenv("TOKEN"))
