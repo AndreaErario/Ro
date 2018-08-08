@@ -3,6 +3,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
 import time
+import os
 
 
 Client = discord.Client()  
@@ -36,4 +37,4 @@ async def on_message(message):
             await client.send_message(message.channel, "Scusa amico, non hai il permesso")
 
 
-client.run("TOKEN")
+client.run(os.getenv"TOKEN")
