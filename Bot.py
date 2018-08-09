@@ -28,6 +28,10 @@ async def on_message(message):
             await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi in modo che possiate usare i comandi del bot, assicurati però che il nuovo ruolo sia nel primo posto della lista dei ruoli\nScrivi il comando !help per una lista di comandi")
     
     
+    if message.content.upper().startswith("!HELP"):
+        await client.send_message(message.channel, "Ecco una lista dei comandi che puoi usare con me:\n\"!setup\": serve a preparare il server a essere utilizzato creando il ruolo \"Bot Admin\"\n\"!cookie\": :cookie:\n\"!say\": fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando *\n I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\" ")
+    
+    
     if message.content.upper().startswith('!COOKIE'):
         try:
             await client.delete_message(message)
