@@ -21,11 +21,11 @@ async def on_message(message):
     
     if message.content.upper().startswith("!SETUP"):
         if "Bot Admin" in [role.name for role in message.server.roles]:
-            await client.send_message(message.channel, "Questo canale è già pronto per essere usato")
+            await client.send_message(message.channel, "Questo canale è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
         else:
             server = message.server
             await client.create_role(server, name="Bot Admin")
-            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato se sei il padrone del server devi assegnare quel ruolo a te stesso e a chi vuoi che possa usare i comandi del bot, assicurati che sia nel primo posto della lista dei ruoli\nScrivi il comando !help per una lista di comandi")
+            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi che possa usare i comandi del bot, assicurati che sia nel primo posto della lista dei ruoli\nScrivi il comando !help per una lista di comandi")
     
     
     if message.content.upper().startswith('!COOKIE'):
