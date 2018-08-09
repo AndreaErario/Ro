@@ -25,7 +25,7 @@ async def on_message(message):
         else:
             server = message.server
             await client.create_role(server, name="Bot Admin")
-            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato se sei il padrone del server devi aggiungere quel ruolo a chi vuoi assicurandoti che sia nel primo posto della lista e che abbia i permessi di amministratore")
+            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato se sei il padrone del server devi assegnare quel ruolo a te stesso e a chi vuoi che possa usare i comandi del bot, assicurati che sia nel primo posto della lista dei ruoli\nScrivi il comando !help per una lista di comandi")
     
     
     if message.content.upper().startswith('!COOKIE'):
