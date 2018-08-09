@@ -1,3 +1,5 @@
+#Creato da AndreaErario nel 2018
+
 import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -16,6 +18,15 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    
+    if message.content.upper().startswith("!SETUP"):
+        if "Bot Admin" in [role.name for role in message.server.roles]:
+            await client.send_message(message.channel, "Questo canale è già pronto per essere usato")
+        else:
+            server = message.server
+            await client.create_role(server, name="Bot Admin")
+            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato se sei il padrone del server devi aggiungere quel ruolo a chi vuoi assicurandoti che sia nel primo posto della lista e che abbia i permessi di amministratore")
+    
     
     if message.content.upper().startswith('!COOKIE'):
         try:
