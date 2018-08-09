@@ -37,7 +37,7 @@ async def on_message(message):
     
     
     if message.content.upper().startswith('!SAY'):
-        if "role" in [role.name for role in message.author.roles]:
+        if "Bot Admin" in [role.name for role in message.author.roles]:
             args = message.content.split(" ")
             try:
                 await client.delete_message(message)
