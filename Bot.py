@@ -29,7 +29,7 @@ async def on_message(message):
     
     
     if message.content.upper().startswith("!HELP"):
-        await client.send_message(message.channel, "Ecco una lista dei comandi che puoi usare con me:\n\"!setup\": serve a preparare il server a essere utilizzato creando il ruolo \"Bot Admin\"\n\"!cookie\": :cookie:\n\"!say\": fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando *\n\"!clear\": Cancella moltissimi messaggi dalla chat *\nI comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\" ")
+        await client.send_message(message.channel, "Ecco una lista dei comandi che puoi usare con me:\n\"!setup\": serve a preparare il server a essere utilizzato creando il ruolo \"Bot Admin\"\n\"!help\": Ormai dovresti saperlo :upside_down:\n\"!cookie\": :cookie:\n\"!say\": fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando *\n\"!clear\": Cancella moltissimi messaggi dalla chat *\nI comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\" ")
     
     
     if message.content.upper().startswith('!COOKIE'):
