@@ -53,7 +53,7 @@ async def on_message(message):
 
     
     if message.content.upper().startswith("!CLEAR"):
-        if "Admin Bot" in [role.name for role in message.author.roles]:
+        if "Bot Admin" in [role.name for role in message.author.roles]:
             tmp = await client.send_message(message.channel, 'Cancellando...')
             async for msg in client.logs_from(message.channel):
                 await client.delete_message(msg)
