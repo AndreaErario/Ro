@@ -21,7 +21,7 @@ async def on_message(message):
     
     if message.content.upper().startswith("!SETUP"):
         if "Bot Admin" in [role.name for role in message.server.roles]:
-            await client.send_message(message.channel, "Questo canale è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
+            await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
         else:
             server = message.server
             await client.create_role(server, name="Bot Admin")
