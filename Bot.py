@@ -25,7 +25,7 @@ async def on_message(message):
         else:
             server = message.server
             await client.create_role(server, name="Bot Admin")
-            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi in modo che possiate usare i comandi del bot, assicurati però che il nuovo ruolo sia nel primo posto della lista dei ruoli\nScrivi il comando !help per una lista di comandi")
+            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
     
     
     if message.content.upper().startswith("!HELP"):
