@@ -6,6 +6,7 @@ from discord.ext import commands
 import asyncio
 import time
 import os
+import random
 
 
 Client = discord.Client()  
@@ -71,6 +72,9 @@ async def on_message(message):
             await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
         else:
             await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
+    
+    if message.content.upper().startswith("!LANCIOMONETA"):
+        await client.send_message(message.channel, random.choice(["Testa", "Croce"]))
     
     
 client.run(os.getenv("TOKEN"))
