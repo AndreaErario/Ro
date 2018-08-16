@@ -21,13 +21,15 @@ async def on_ready():
 async def on_message(message):
     
     if message.content.upper().startswith("!SETUP"):
-        if "Bot Admin" in [role.name for role in message.server.roles]:
-            await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
-        else:
-            server = message.server
-            await client.create_role(server, name="Bot Admin")
-            await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
-    
+        try:
+            if "Bot Admin" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
+            else:
+                server = message.server
+                await client.create_role(server, name="Bot Admin")
+                await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
+        except AttributeError:
+            await client.send_message(message.author, "Funziono solo nei server")
     
     if message.content.upper().startswith("!HELP"):
         embed = discord.Embed(
