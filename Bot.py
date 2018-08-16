@@ -75,7 +75,7 @@ async def on_message(message):
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
-            await client.send_message(message.author, "Funziono solo nei server"
+            await client.send_message(message.author, "Funziono solo nei server")
     
     
     if message.content.upper().startswith("!LANCIOMONETA"):
