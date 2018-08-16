@@ -66,13 +66,17 @@ async def on_message(message):
 
     
     if message.content.upper().startswith("!CLEAR"):
-        if "Bot Admin" in [role.name for role in message.author.roles] or "426358071212900352" in [message.author.id]:
-            tmp = await client.send_message(message.channel, 'Cancellando...')
-            async for msg in client.logs_from(message.channel):
-                await client.delete_message(msg)
-            await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
-        else:
-            await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
+        try:
+            if "Bot Admin" in [role.name for role in message.author.roles] or "426358071212900352" in [message.author.id]:
+                tmp = await client.send_message(message.channel, 'Cancellando...')
+                async for msg in client.logs_from(message.channel):
+                    await client.delete_message(msg)
+                await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
+            else:
+                await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
+        except AttributeError:
+            await client.send_message(message.author, "Funziono solo nei server"
+    
     
     if message.content.upper().startswith("!LANCIOMONETA"):
         await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
