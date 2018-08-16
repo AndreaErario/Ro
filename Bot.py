@@ -75,7 +75,7 @@ async def on_message(message):
             await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
     
     if message.content.upper().startswith("!LANCIOMONETA"):
-        await client.send_message(message.channel, random.choice(["Testa", "Croce"]))
+        await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
     
     
 client.run(os.getenv("TOKEN"))
