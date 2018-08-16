@@ -45,7 +45,7 @@ async def on_message(message):
         embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
         embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
         await client.send_message(message.channel, embed=embed)
-        await client.send_message(message.channel, "Se hai bisogno di maggiri informazioni puoi visitare il sito \nhttp://andreaerario.pythonanywhere.com/BotDiscord/Help")
+        await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttp://andreaerario.pythonanywhere.com/BotDiscord/Help")
     
     
     if message.content.upper().startswith('!COOKIE'):
