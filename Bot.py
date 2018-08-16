@@ -47,7 +47,6 @@ async def on_message(message):
     
     if message.content.upper().startswith('!COOKIE'):
         try:
-            await client.delete_message(message)
             await client.send_message(message.channel, ":cookie:")
         except discord.errors.NotFound:
             return
