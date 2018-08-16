@@ -29,7 +29,7 @@ async def on_message(message):
                 await client.create_role(server, name="Bot Admin")
                 await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare quel ruolo a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
         except AttributeError:
-            await client.send_message(message.author, "Funziono solo nei server")
+            await client.send_message(message.author, "Questo comando funziona solo nei server")
     
     if message.content.upper().startswith("!HELP"):
         embed = discord.Embed(
@@ -55,16 +55,18 @@ async def on_message(message):
     
     
     if message.content.upper().startswith('!SAY'):
-        if "Bot Admin" in [role.name for role in message.author.roles] or "426358071212900352" in [message.author.id]:
-            args = message.content.split(" ")
-            try:
-                await client.delete_message(message)
-                await client.send_message(message.channel,"%s " % (" ".join(args[1:])))
-            except discord.errors.NotFound:
-                return
-        else:
-            await client.send_message(message.channel, "Scusa amico, non hai il permesso")
-
+        try:
+            if "Bot Admin" in [role.name for role in message.author.roles] or "426358071212900352" in [message.author.id]:
+                args = message.content.split(" ")
+                try:
+                    await client.delete_message(message)
+                    await client.send_message(message.channel,"%s " % (" ".join(args[1:])))
+                except discord.errors.NotFound:
+                    return
+            else:
+                await client.send_message(message.channel, "Scusa amico, non hai il permesso")
+        except AttributeError:
+            await client.send_message(message.author, "Questo comando funziona solo nei server")
     
     if message.content.upper().startswith("!CLEAR"):
         try:
@@ -76,7 +78,7 @@ async def on_message(message):
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
-            await client.send_message(message.author, "Funziono solo nei server")
+            await client.send_message(message.author, "Questo comando funziona solo nei server")
     
     
     if message.content.upper().startswith("!LANCIOMONETA"):
