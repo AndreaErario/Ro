@@ -57,7 +57,7 @@ async def on_message(message):
     
     if message.content.upper().startswith('!SAY'):
         try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or "426358071212900352" in [message.author.id]:
+            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
                 args = message.content.split(" ")
                 try:
                     await client.delete_message(message)
@@ -71,7 +71,7 @@ async def on_message(message):
     
     if message.content.upper().startswith("!CLEAR"):
         try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or "426358071212900352" in [message.author.id]:
+            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
                 tmp = await client.send_message(message.channel, 'Cancellando...')
                 async for msg in client.logs_from(message.channel):
                     await client.delete_message(msg)
