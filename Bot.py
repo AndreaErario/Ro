@@ -86,4 +86,23 @@ async def on_message(message):
         await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
     
     
+    if message.content.upper().startswith("!LEAVE"):
+        try:
+            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                if "Bot Admin" in [role.name for role in message.server.roles]:
+                    role = get(message.server.roles, name = "Bot Admin")
+                    await client.delete_role(message.server, role)
+                    await client.send_message(message.channel, "Il ruolo Bot Admin è stato eliminato")
+                    await client.send_message(message.channel, "Sono uscito dal Server")
+                    await client.leave_server(message.server)
+                else:
+                    await client.send_message(message.channel, "Sono uscito dal Server")
+                    await client.leave_server(message.server)
+            else:
+                await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
+        except AttributeError:
+            await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
+        
+        
+    
 client.run(os.getenv("TOKEN"))
