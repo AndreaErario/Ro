@@ -38,11 +38,11 @@ async def on_message(message):
             description = "Ecco una lista di comandi che puoi usare con me:", 
             colour = discord.Color.dark_blue()
         )
-        embed.add_field(name="!setup", value="serve a preparare il server a essere utilizzato creando il ruolo \"Bot Admin\"\n", inline=False)
+        embed.add_field(name="!setup", value="Serve a preparare il server a essere utilizzato creando il ruolo \"Bot Admin\"\n", inline=False)
         embed.add_field(name="!help", value="Ormai dovresti saperlo :upside_down:\n", inline=False)
         embed.add_field(name="!cookie", value=":cookie:\n", inline=False)
         embed.add_field(name="!lanciomoneta", value="Testa o Croce?", inline=False)
-        embed.add_field(name="!say *", value="fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando :speaking_head:\n", inline=False)
+        embed.add_field(name="!say *", value="Fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando :speaking_head:\n", inline=False)
         embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
         embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
         embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
