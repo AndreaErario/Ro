@@ -102,6 +102,7 @@ async def on_message(message):
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
             await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
+            
         
         
     
