@@ -29,7 +29,7 @@ async def on_message(message):
         try:
             if "Bot Admin" in [role.name for role in message.server.roles] and "Bot No" in [role.name for role in message.server.roles]:
                 await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
-            elif "Bot No" in [role.name for role in message.server.roles]:
+            elif "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 server = message.server
@@ -40,7 +40,7 @@ async def on_message(message):
             await client.send_message(message.author, "Questo comando funziona solo nei server")
     
     if message.content.upper().startswith("!HELP"):
-        if "Bot No" in [role.name for role in message.server.roles]:
+        if "Bot No" in [role.name for role in message.author.roles]:
             await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
         else:    
             embed = discord.Embed(
@@ -63,7 +63,7 @@ async def on_message(message):
     
     if message.content.upper().startswith('!COOKIE'):
         try:
-            if "Bot No" in [role.name for role in message.server.roles]:
+            if "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:    
                 await client.send_message(message.channel, ":cookie:")
@@ -80,7 +80,7 @@ async def on_message(message):
                     await client.send_message(message.channel,"%s " % (" ".join(args[1:])))
                 except discord.errors.NotFound:
                     return
-            elif "Bot No" in [role.name for role in message.server.roles]:
+            elif "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
@@ -94,7 +94,7 @@ async def on_message(message):
                 async for msg in client.logs_from(message.channel):
                     await client.delete_message(msg)
                 await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
-            elif "Bot No" in [role.name for role in message.server.roles]:
+            elif "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
@@ -103,7 +103,7 @@ async def on_message(message):
     
     
     if message.content.upper().startswith("!LANCIOMONETA"):
-        if "Bot No" in [role.name for role in message.server.roles]:
+        if "Bot No" in [role.name for role in message.author.roles]:
             await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
         else:
             await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
@@ -122,7 +122,7 @@ async def on_message(message):
                 else:
                     await client.send_message(message.channel, "Sono uscito dal Server")
                     await client.leave_server(message.server)
-            elif "Bot No" in [role.name for role in message.server.roles]:
+            elif "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
@@ -131,7 +131,7 @@ async def on_message(message):
     
     if message.content.upper().startswith("!GIF"):
         try:
-            if "Bot No" in [role.name for role in message.server.roles]:
+            if "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 gif_tag = message.content[5:]
