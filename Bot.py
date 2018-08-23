@@ -13,7 +13,8 @@ import requests
 import io
 
 
-Client = discord.Client()  
+Client = discord.Client()
+g = safygiphy.Giphy()
 client = commands.Bot(command_prefix="!")
 
 
