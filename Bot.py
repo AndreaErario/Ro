@@ -27,7 +27,7 @@ async def on_message(message):
     
     if message.content.upper().startswith("!SETUP"):
         try:
-            if "Bot Admin" in [role.name for role in message.server.roles]:
+            if "Bot Admin" in [role.name for role in message.server.roles] and "Bot No" in [role.name for role in message.server.roles]:
                 await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
             elif "Bot No" in [role.name for role in message.server.roles]:
                 await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
