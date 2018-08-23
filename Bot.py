@@ -30,7 +30,7 @@ async def on_message(message):
             if "Bot Admin" in [role.name for role in message.server.roles] and "Bot No" in [role.name for role in message.server.roles]:
                 await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
             elif "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+                await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 server = message.server
                 await client.create_role(server, name="Bot Admin")
@@ -41,7 +41,7 @@ async def on_message(message):
     
     if message.content.upper().startswith("!HELP"):
         if "Bot No" in [role.name for role in message.server.roles]:
-            await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+            await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
         else:    
             embed = discord.Embed(
                 title = "Help",
@@ -64,7 +64,7 @@ async def on_message(message):
     if message.content.upper().startswith('!COOKIE'):
         try:
             if "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+                await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:    
                 await client.send_message(message.channel, ":cookie:")
         except discord.errors.NotFound:
@@ -81,7 +81,7 @@ async def on_message(message):
                 except discord.errors.NotFound:
                     return
             elif "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+                await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
         except AttributeError:
@@ -95,7 +95,7 @@ async def on_message(message):
                     await client.delete_message(msg)
                 await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
             elif "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+                await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
@@ -104,7 +104,7 @@ async def on_message(message):
     
     if message.content.upper().startswith("!LANCIOMONETA"):
         if "Bot No" in [role.name for role in message.server.roles]:
-            await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+            await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
         else:
             await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
         
@@ -123,7 +123,7 @@ async def on_message(message):
                     await client.send_message(message.channel, "Sono uscito dal Server")
                     await client.leave_server(message.server)
             elif "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+                await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
@@ -132,7 +132,7 @@ async def on_message(message):
     if message.content.upper().startswith("!GIF"):
         try:
             if "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+                await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
                 gif_tag = message.content[5:]
                 rgif = g.random(tag=str(gif_tag))
