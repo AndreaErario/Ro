@@ -8,6 +8,9 @@ import asyncio
 import time
 import os
 import random
+import safygiphy
+import request
+import io
 
 
 Client = discord.Client()  
@@ -104,7 +107,22 @@ async def on_message(message):
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
             await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
-            
+    
+    if message.content.upper().startswith("!GIF"):
+        try:
+            gif_tag = message.content[5:]
+            rgif = g.random(tag=str(gif_tag))
+            response = requests.get(
+                str(rgif.get("data", {}).get('image_original_url')), stream=True
+            )
+            if gif_tag == "":
+                await client.send_message(message.channel, "Sto cercando...")
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso un gif a caso")
+            else:
+                await client.send_message(message.channel, "Sto cercando...")
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso un gif a caso con il tag {}".format(gif_tag))
+        except AttributeError:
+            await client.send_message(message.channel, "Qualcosa non và :neutral_face:")        
         
         
     
