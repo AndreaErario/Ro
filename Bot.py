@@ -145,14 +145,14 @@ async def on_message(message):
                 else:
                     await client.send_message(message.channel, "Sto cercando...")
                     await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
-            except AttributeError:
-                await client.send_message(message.channel, "Questo tag non esiste :poop:")
-            except discord.errors.HTTPException:
-                await client.send_message(message.channel, "Sto cercando...")
-                if gif_tag == "":
-                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso")
-                else:
-                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {}".format(gif_tag))
+        except AttributeError:
+            await client.send_message(message.channel, "Questo tag non esiste :poop:")
+        except discord.errors.HTTPException:
+            await client.send_message(message.channel, "Sto cercando...")
+            if gif_tag == "":
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso")
+            else:
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {}".format(gif_tag))
 
            
 client.run(os.getenv("TOKEN"))
