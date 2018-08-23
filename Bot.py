@@ -49,6 +49,7 @@ async def on_message(message):
         embed.add_field(name="!say *", value="Fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando :speaking_head:\n", inline=False)
         embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
         embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
+        embed.add_field(name="!gif", value="Manda un gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso\n", inline=False)
         embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
         await client.send_message(message.channel, embed=embed)
         await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttp://andreaerario.pythonanywhere.com/BotDiscord/Help")
