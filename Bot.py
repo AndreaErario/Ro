@@ -49,7 +49,7 @@ async def on_message(message):
         embed.add_field(name="!say *", value="Fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando :speaking_head:\n", inline=False)
         embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
         embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
-        embed.add_field(name="!gif", value="Manda un gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso su Giphy\n", inline=False)
+        embed.add_field(name="!gif", value="Manda una gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso su Giphy\n", inline=False)
         embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
         await client.send_message(message.channel, embed=embed)
         await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttp://andreaerario.pythonanywhere.com/BotDiscord/Help")
@@ -119,18 +119,18 @@ async def on_message(message):
             )
             if gif_tag == "":
                 await client.send_message(message.channel, "Sto cercando...")
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso un gif a caso su Giphy")
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
             else:
                 await client.send_message(message.channel, "Sto cercando...")
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso un gif a caso con il tag {} su Giphy".format(gif_tag))
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
         except AttributeError:
             await client.send_message(message.channel, "Questo tag non esiste :poop:")
         except discord.errors.HTTPException:
             await client.send_message(message.channel, "Sto cercando...")
             if gif_tag == "":
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso un gif a caso")
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso")
             else:
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso un gif a caso con il tag {}".format(gif_tag))
+                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {}".format(gif_tag))
 
         
         
