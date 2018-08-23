@@ -32,10 +32,19 @@ async def on_message(message):
             elif "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
             else:
-                server = message.server
-                await client.create_role(server, name="Bot Admin")
-                await client.create_role(server, name="Bot No")
-                await client.send_message(message.channel, "Un ruolo di nome Bot Admin e uno di nome Bot No sono stati creati!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot Se non vuoi che qualcuno possa usare i comandi del bot assegnali Bot No e non potrà più fare nulla\nScrivi il comando !help per una lista di comandi")
+                if "Bot Admin" in [role.name for role in message.server.roles]:
+                    server = message.server
+                    await client.create_role(server, name="Bot No")
+                    await client.send_message(message.channel, "Un ruolo di nome Bot Admin e uno di nome Bot No sono stati creati!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot Se non vuoi che qualcuno possa usare i comandi del bot assegnali Bot No e non potrà più fare nulla\nScrivi il comando !help per una lista di comandi")
+                elif "Bot No" in [role.name for role in message.server.roles]:
+                    server = message.server
+                    await client.create_role(server, name="Bot No")
+                    await client.send_message(message.channel, "Un ruolo di nome Bot Admin e uno di nome Bot No sono stati creati!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot Se non vuoi che qualcuno possa usare i comandi del bot assegnali Bot No e non potrà più fare nulla\nScrivi il comando !help per una lista di comandi")
+                else:
+                    server = message.server
+                    await client.create_role(server, name="Bot Admin")
+                    await client.create_role(server, name="Bot No")
+                    await client.send_message(message.channel, "Un ruolo di nome Bot Admin e uno di nome Bot No sono stati creati!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot Se non vuoi che qualcuno possa usare i comandi del bot assegnali Bot No e non potrà più fare nulla\nScrivi il comando !help per una lista di comandi")
         except AttributeError:
             await client.send_message(message.author, "Questo comando funziona solo nei server")
     
