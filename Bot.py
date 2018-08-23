@@ -34,6 +34,7 @@ async def on_message(message):
             else:
                 server = message.server
                 await client.create_role(server, name="Bot Admin")
+                await client.create_role(server, name="Bot No")
                 await client.send_message(message.channel, "Un ruolo di nome Bot Admin e uno di nome Bot No sono stati creati!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot Se non vuoi che qualcuno possa usare i comandi del bot assegnali Bot No e non potrà più fare nulla\nScrivi il comando !help per una lista di comandi")
         except AttributeError:
             await client.send_message(message.author, "Questo comando funziona solo nei server")
@@ -62,7 +63,10 @@ async def on_message(message):
     
     if message.content.upper().startswith('!COOKIE'):
         try:
-            await client.send_message(message.channel, ":cookie:")
+            if "Bot No" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+            else:    
+                await client.send_message(message.channel, ":cookie:")
         except discord.errors.NotFound:
             return
     
@@ -76,6 +80,8 @@ async def on_message(message):
                     await client.send_message(message.channel,"%s " % (" ".join(args[1:])))
                 except discord.errors.NotFound:
                     return
+            elif "Bot No" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
         except AttributeError:
@@ -88,6 +94,8 @@ async def on_message(message):
                 async for msg in client.logs_from(message.channel):
                     await client.delete_message(msg)
                 await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
+            elif "Bot No" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
@@ -95,7 +103,11 @@ async def on_message(message):
     
     
     if message.content.upper().startswith("!LANCIOMONETA"):
-        await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
+        if "Bot No" in [role.name for role in message.server.roles]:
+            await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
+        else:
+            await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
+        
     
     
     if message.content.upper().startswith("!LEAVE"):
@@ -110,6 +122,8 @@ async def on_message(message):
                 else:
                     await client.send_message(message.channel, "Sono uscito dal Server")
                     await client.leave_server(message.server)
+            elif "Bot No" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
             else:
                 await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
         except AttributeError:
@@ -117,27 +131,28 @@ async def on_message(message):
     
     if message.content.upper().startswith("!GIF"):
         try:
-            gif_tag = message.content[5:]
-            rgif = g.random(tag=str(gif_tag))
-            response = requests.get(
-                str(rgif.get("data", {}).get('image_original_url')), stream=True
-            )
-            if gif_tag == "":
-                await client.send_message(message.channel, "Sto cercando...")
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
+            if "Bot No" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Non puoi fare nessun comando {}".format(message.author.name))
             else:
+                gif_tag = message.content[5:]
+                rgif = g.random(tag=str(gif_tag))
+                response = requests.get(
+                    str(rgif.get("data", {}).get('image_original_url')), stream=True
+                )
+                if gif_tag == "":
+                    await client.send_message(message.channel, "Sto cercando...")
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
+                else:
+                    await client.send_message(message.channel, "Sto cercando...")
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
+            except AttributeError:
+                await client.send_message(message.channel, "Questo tag non esiste :poop:")
+            except discord.errors.HTTPException:
                 await client.send_message(message.channel, "Sto cercando...")
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
-        except AttributeError:
-            await client.send_message(message.channel, "Questo tag non esiste :poop:")
-        except discord.errors.HTTPException:
-            await client.send_message(message.channel, "Sto cercando...")
-            if gif_tag == "":
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso")
-            else:
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {}".format(gif_tag))
+                if gif_tag == "":
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso")
+                else:
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {}".format(gif_tag))
 
-        
-        
-    
+           
 client.run(os.getenv("TOKEN"))
