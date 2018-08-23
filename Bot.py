@@ -9,7 +9,7 @@ import time
 import os
 import random
 import safygiphy
-import request
+import requests
 import io
 
 
