@@ -1,2 +1,2 @@
-discord.py
-safygiphy
+discord.py == 0.16.12
+safygiphy == 1
