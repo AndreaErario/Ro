@@ -163,11 +163,7 @@ async def on_message(message):
         except AttributeError:
             await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
         except discord.errors.HTTPException:
-            await client.send_message(message.channel, "Sto cercando...")
-            if gif_tag == "":
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso")
-            else:
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {}".format(gif_tag))
+            await client.send_message(message.channel, "Non ho trovato nulla :poop:")
 
            
 client.run(os.getenv("TOKEN"))
