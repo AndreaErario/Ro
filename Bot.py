@@ -27,10 +27,10 @@ async def on_message(message):
     
     if message.content.upper().startswith("!SETUP"):
         try:
-            if "Bot Admin" in [role.name for role in message.server.roles] and "Bot No" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
-            elif "Bot No" in [role.name for role in message.author.roles]:
+            if "Bot No" in [role.name for role in message.author.roles]:
                 await client.send_message(message.channel, "Non puoi usare nessun comando {}".format(message.author.name))
+            elif "Bot Admin" in [role.name for role in message.server.roles] and "Bot No" in [role.name for role in message.server.roles]:
+                await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
             else:
                 if "Bot Admin" in [role.name for role in message.server.roles]:
                     server = message.server
