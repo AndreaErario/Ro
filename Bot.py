@@ -129,22 +129,36 @@ async def on_message(message):
             await client.send_message(message.channel, "Non ho trovato nulla :poop:")
 
     if message.content.upper().startswith("!SUPERROLE"):
-        global variabile
-        if variabile == False:
-            variabile = True
+        try:
+            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                global variabile
+                if variabile == False:
+                    variabile = True
+            else:
+                await client.send_message(message.channel, "Scusa amico, non hai il permesso")
+        except AttributeError:
+            await client.send_message(message.channel, "Questo comando funziona solo nei Server")
     if message.content.upper().startswith("!SUPERROLE"):
-        BotAdmin = discord.utils.get(message.server.roles, name="Bot Admin")      
-        while variabile == True:
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.red())        
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.orange())
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.gold())
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.green())
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.blue())
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.purple())
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.teal())
-            await client.edit_role(message.server, BotAdmin, colour = discord.Color.default())            
+        try:
+            BotAdmin = discord.utils.get(message.server.roles, name="Bot Admin")      
+            while variabile == True:
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.red())        
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.orange())
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.gold())
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.green())
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.blue())
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.purple())
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.teal())
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.default())            
+        except AttributeError:
+            None
     if message.content.upper().startswith("!STOP"):
-        variabile = False        
-    
+        try:
+            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                variabile = False        
+            else:
+                await client.send_message(message.channel, "Scusa amico, non hai il permesso")
+        except AttributeError:
+            await client.send_message(message.channel, "Questo comando funziona solo nei Server")
            
 client.run(os.getenv("TOKEN"))
