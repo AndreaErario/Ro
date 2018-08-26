@@ -147,21 +147,13 @@ async def on_message(message):
             BotAdmin = discord.utils.get(message.server.roles, name="Bot Admin")      
             while variabile == True:
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.red())        
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.orange())
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.gold())
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.green())
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.blue())
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.purple())
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.teal())
-                time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.default())
-                time.sleep(1)
         except AttributeError:
             None
     if message.content.upper().startswith("!STOP"):
