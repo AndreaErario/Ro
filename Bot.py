@@ -17,6 +17,7 @@ Client = discord.Client()
 g = safygiphy.Giphy()
 client = commands.Bot(command_prefix="!")
 
+variabile = False
 
 @client.event 
 async def on_ready():
@@ -127,5 +128,23 @@ async def on_message(message):
         except discord.errors.HTTPException:
             await client.send_message(message.channel, "Non ho trovato nulla :poop:")
 
+    if message.content.upper().startswith("!SUPERROLE"):
+        global variabile
+        if variabile == False:
+            variabile = True
+    if message.content.upper().startswith("!SUPERROLE"):
+        BotAdmin = discord.utils.get(message.server.roles, name="Bot Admin")      
+        while variabile == True:
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.red())        
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.orange())
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.gold())
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.green())
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.blue())
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.purple())
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.teal())
+            await client.edit_role(message.server, BotAdmin, colour = discord.Color.default())            
+    if message.content.upper().startswith("!STOP"):
+        variabile = False        
+    
            
 client.run(os.getenv("TOKEN"))
