@@ -160,7 +160,7 @@ async def on_message(message):
                 time.sleep(1)
                 await client.edit_role(message.server, BotAdmin, colour = discord.Color.teal())
                 time.sleep(1)
-                await client.edit_role(message.server, BotAdmin, colour = discord.Color.)
+                await client.edit_role(message.server, BotAdmin, colour = discord.Color.default())
                 time.sleep(1)
         except AttributeError:
             None
