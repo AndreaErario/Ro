@@ -51,6 +51,7 @@ async def on_message(message):
             embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
             embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
             embed.add_field(name="!gif", value="Manda una gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso su Giphy (nel caso dovessi inserire un Tag inesistente verrà mostrato un messaggio d'errore)\n", inline=False)
+            embed.add_field(neme="!superrole *", value="Cambia il colore di Bot Admin infinitamente, lo puoi fermare con il comando !stop (Ogni volta che il bot verrà aggiornato si fermerà :no_mouth:")
             embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
             embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
             await client.send_message(message.channel, embed=embed)
@@ -134,6 +135,9 @@ async def on_message(message):
                 global variabile
                 if variabile == False:
                     variabile = True
+                    await client.send_message(message.channel, ":dragon:")
+                else:
+                    await client.send_message(message.channel, "Il comando è gia attivo... assicurati di avere il ruolo Bot Admin")
             else:
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
         except AttributeError:
@@ -155,7 +159,8 @@ async def on_message(message):
     if message.content.upper().startswith("!STOP"):
         try:
             if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                variabile = False        
+                variabile = False
+                await client.send_message(message.channel, "Ok...")
             else:
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
         except AttributeError:
