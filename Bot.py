@@ -32,7 +32,7 @@ async def on_message(message):
             else:
                 server = message.server
                 await client.create_role(server, name="Bot Admin")
-                await client.send_message(message.channel, "Un ruolo di nome Bot Admin e uno di nome Bot No sono stati creati!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
+                await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
         except AttributeError:
             await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
