@@ -135,7 +135,7 @@ async def on_message(message):
                 global variabile
                 if variabile == False:
                     variabile = True
-                    await client.send_message(message.channel, ":dragon:")
+                    await client.send_message(message.channel, "Il mio Potere scorre nel tuo nome :dragon:")
                 else:
                     await client.send_message(message.channel, "Il comando è gia attivo... assicurati di avere il ruolo Bot Admin")
             else:
@@ -195,8 +195,11 @@ async def on_message(message):
     if message.content.upper().startswith("!STOP"):
         try:
             if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                variabile = False
-                await client.send_message(message.channel, "Ok...")
+                if variabile == False:
+                    await client.send_message(message.channel, "Non puoi fermare un comando non ancora funzionante :upside_down:")
+                else:
+                    variabile = False
+                    await client.send_message(message.channel, "Il mio Potere è stato fermato")
             else:
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
         except AttributeError:
