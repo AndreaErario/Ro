@@ -22,6 +22,10 @@ variabile = False
 @client.event 
 async def on_ready():
     print("Il Bot e' ora operativo")
+    
+@client.event
+async def on_server_join(server):
+    await client.send_message(server.owner, "Grazie per avermi aggiunto al tuo Server.\nSe vuoi sfruttarmi al meglio scrivi in un canale testuale del tuo Server il comando !setup che creerà il ruolo Bot Admin automaticamente.\nSe hai bisogno di una lista dei comandi puoi usare il comando !help")    
 
 @client.event
 async def on_message(message):
