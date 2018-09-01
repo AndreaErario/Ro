@@ -56,6 +56,7 @@ async def on_message(message):
             embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
             embed.add_field(name="!gif", value="Manda una gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso su Giphy (nel caso dovessi inserire un Tag inesistente verrà mostrato un messaggio d'errore)\n", inline=False)
             embed.add_field(name="!superrole *", value="Cambia il colore di Bot Admin infinitamente, lo puoi fermare con il comando !stop (Ogni volta che il bot verrà aggiornato si fermerà :no_mouth:)", inline=False)
+            embed.add_field(name="!doveatterro", value="Se non sai dove lanciarti ti basterà usare questo comando che ti indicherà un posto casuale per atterrare", inline=False)
             embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
             embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
             await client.send_message(message.channel, embed=embed)
@@ -208,5 +209,8 @@ async def on_message(message):
                 await client.send_message(message.channel, "Scusa amico, non hai il permesso")
         except AttributeError:
             await client.send_message(message.channel, "Questo comando funziona solo nei Server")
+    
+    if message.content.upper().startswith("!DOVEATTERRO"):
+        await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Sponde del Saccheggio","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
            
 client.run(os.getenv("TOKEN"))
