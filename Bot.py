@@ -31,17 +31,23 @@ async def on_server_join(server):
 async def on_message(message):
     
     if message.content.upper().startswith("!SETUP"):
-        try:
-            if "Bot Admin" in [role.name for role in message.server.roles]:
-                await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
-            else:
-                server = message.server
-                await client.create_role(server, name="Bot Admin")
-                await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
-        except AttributeError:
-            await client.send_message(message.author, "Questo comando funziona solo nei Server")
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                if "Bot Admin" in [role.name for role in message.server.roles]:
+                    await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
+                else:
+                    server = message.server
+                    await client.create_role(server, name="Bot Admin")
+                    await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
+            except AttributeError:
+                await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
     if message.content.upper().startswith("!HELP"):
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
             embed = discord.Embed(
                 title = "Help",
                 description = "Ecco una lista di comandi che puoi usare con me:", 
@@ -63,90 +69,111 @@ async def on_message(message):
             await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttp://andreaerario.pythonanywhere.com/BotDiscord/Help")
     
     if message.content.upper().startswith('!COOKIE'):
-        try:
-            await client.send_message(message.channel, ":cookie:")
-        except discord.errors.NotFound:
-            return
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                await client.send_message(message.channel, ":cookie:")
+            except discord.errors.NotFound:
+                return
     
     if message.content.upper().startswith('!SAY'):
-        try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                args = message.content.split(" ")
-                try:
-                    await client.delete_message(message)
-                    await client.send_message(message.channel,"%s " % (" ".join(args[1:])))
-                except discord.errors.NotFound:
-                    return
-            else:
-                await client.send_message(message.channel, "Scusa amico, non hai il permesso")
-        except AttributeError:
-            await client.send_message(message.author, "Questo comando funziona solo nei Server")
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                    args = message.content.split(" ")
+                    try:
+                        await client.delete_message(message)
+                        await client.send_message(message.channel,"%s " % (" ".join(args[1:])))
+                    except discord.errors.NotFound:
+                        return
+                else:
+                    await client.send_message(message.channel, "Scusa amico, non hai il permesso")
+            except AttributeError:
+                await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
     if message.content.upper().startswith("!CLEAR"):
-        try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                tmp = await client.send_message(message.channel, 'Cancellando...')
-                async for msg in client.logs_from(message.channel):
-                    await client.delete_message(msg)
-                await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
-            else:
-                await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
-        except AttributeError:
-            await client.send_message(message.author, "Questo comando funziona solo nei Server")
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                    tmp = await client.send_message(message.channel, 'Cancellando...')
+                    async for msg in client.logs_from(message.channel):
+                        await client.delete_message(msg)
+                    await client.send_message(message.channel, 'Comando eseguito con successo! :wastebasket:')
+                else:
+                    await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
+            except AttributeError:
+                await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
     
     if message.content.upper().startswith("!LANCIOMONETA"):
-        await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            await client.send_message(message.channel, random.choice(["È uscito Testa", "È uscito Croce"]))
            
     
     if message.content.upper().startswith("!LEAVE"):
-        try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                if "Bot Admin" in [role.name for role in message.server.roles]:
-                    role = get(message.server.roles, name = "Bot Admin")
-                    await client.delete_role(message.server, role)
-                    await client.send_message(message.channel, "Il ruolo Bot Admin è stato eliminato")
-                    await client.send_message(message.channel, "Sono uscito dal Server")
-                    await client.leave_server(message.server)
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                    if "Bot Admin" in [role.name for role in message.server.roles]:
+                        role = get(message.server.roles, name = "Bot Admin")
+                        await client.delete_role(message.server, role)
+                        await client.send_message(message.channel, "Il ruolo Bot Admin è stato eliminato")
+                        await client.send_message(message.channel, "Sono uscito dal Server")
+                        await client.leave_server(message.server)
+                    else:
+                        await client.send_message(message.channel, "Sono uscito dal Server")
+                        await client.leave_server(message.server)
                 else:
-                    await client.send_message(message.channel, "Sono uscito dal Server")
-                    await client.leave_server(message.server)
-            else:
-                await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
-        except AttributeError:
-            await client.send_message(message.channel, "Questo comando funziona solo nei Server")
+                    await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
+            except AttributeError:
+                await client.send_message(message.channel, "Questo comando funziona solo nei Server")
     
     if message.content.upper().startswith("!GIF"):
-        try:
-            gif_tag = message.content[5:]
-            rgif = g.random(tag=str(gif_tag))
-            response = requests.get(
-                str(rgif.get("data", {}).get('image_original_url')), stream=True
-            )
-            if gif_tag == "":
-                await client.send_message(message.channel, "Sto cercando...")
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
-            else:
-                await client.send_message(message.channel, "Sto cercando...")
-                await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
-        except AttributeError:
-            await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
-        except discord.errors.HTTPException:
-            await client.send_message(message.channel, "Non ho trovato nulla :poop:")
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                gif_tag = message.content[5:]
+                rgif = g.random(tag=str(gif_tag))
+                response = requests.get(
+                    str(rgif.get("data", {}).get('image_original_url')), stream=True
+                )
+                if gif_tag == "":
+                    await client.send_message(message.channel, "Sto cercando...")
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
+                else:
+                    await client.send_message(message.channel, "Sto cercando...")
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
+            except AttributeError:
+                await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
+            except discord.errors.HTTPException:
+                await client.send_message(message.channel, "Non ho trovato nulla :poop:")
 
     if message.content.upper().startswith("!SUPERROLE"):
-        try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                global variabile
-                if variabile == False:
-                    variabile = True
-                    await client.send_message(message.channel, "Il mio Potere scorre nel tuo nome :dragon:")
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                    global variabile
+                    if variabile == False:
+                        variabile = True
+                        await client.send_message(message.channel, "Il mio Potere scorre nel tuo nome :dragon:")
+                    else:
+                        await client.send_message(message.channel, "Il comando è gia attivo... assicurati di avere il ruolo Bot Admin")
                 else:
-                    await client.send_message(message.channel, "Il comando è gia attivo... assicurati di avere il ruolo Bot Admin")
-            else:
-                await client.send_message(message.channel, "Scusa amico, non hai il permesso")
-        except AttributeError:
-            await client.send_message(message.channel, "Questo comando funziona solo nei Server")
+                    await client.send_message(message.channel, "Scusa amico, non hai il permesso")
+            except AttributeError:
+                await client.send_message(message.channel, "Questo comando funziona solo nei Server")
     if message.content.upper().startswith("!SUPERROLE"):
         try:
             BotAdmin = discord.utils.get(message.server.roles, name="Bot Admin")      
@@ -198,19 +225,25 @@ async def on_message(message):
         except AttributeError:
             None
     if message.content.upper().startswith("!STOP"):
-        try:
-            if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
-                if variabile == False:
-                    await client.send_message(message.channel, "Non puoi fermare un comando non ancora funzionante :upside_down:")
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            try:
+                if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
+                    if variabile == False:
+                        await client.send_message(message.channel, "Non puoi fermare un comando non ancora funzionante :upside_down:")
+                    else:
+                        variabile = False
+                        await client.send_message(message.channel, "Il mio Potere è stato fermato")
                 else:
-                    variabile = False
-                    await client.send_message(message.channel, "Il mio Potere è stato fermato")
-            else:
-                await client.send_message(message.channel, "Scusa amico, non hai il permesso")
-        except AttributeError:
-            await client.send_message(message.channel, "Questo comando funziona solo nei Server")
+                    await client.send_message(message.channel, "Scusa amico, non hai il permesso")
+            except AttributeError:
+                await client.send_message(message.channel, "Questo comando funziona solo nei Server")
     
     if message.content.upper().startswith("!DOVEATTERRO"):
-        await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Sponde del Saccheggio","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Sponde del Saccheggio","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
            
 client.run(os.getenv("TOKEN"))
