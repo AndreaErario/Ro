@@ -34,7 +34,7 @@ async def on_message(message):
         if os.getenv("ID") in [message.author.id]:
             await client.send_message(message.channel, "Ecco la Lista dei Server a cui sono connesso:")
             for server in client.servers:
-                await client.send_message(message.channel, server.name)
+                await client.send_message(message.channel, "\nServer: {}\nProprietario: {}\n".format(server.name, server.owner))
         else:
             await client.send_message(message.channel, "Solo il mio padrone può usare questo comando")
     
