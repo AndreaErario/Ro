@@ -25,7 +25,9 @@ async def on_ready():
     
 @client.event
 async def on_server_join(server):
-    await client.send_message(server.owner, "Grazie per avermi aggiunto al tuo Server.\nSe vuoi sfruttarmi al meglio scrivi in un canale testuale del tuo Server il comando !setup che creerà il ruolo Bot Admin automaticamente.\nSe hai bisogno di una lista dei comandi puoi usare il comando !help")    
+    await client.send_message(server.owner, "Grazie per avermi aggiunto al tuo Server.\nSe vuoi sfruttarmi \
+    al meglio scrivi in un canale testuale del tuo Server il comando !setup che creerà il ruolo Bot Admin \
+    automaticamente.\nSe hai bisogno di una lista dei comandi puoi usare il comando !help")    
 
 @client.event
 async def on_message(message):
@@ -36,11 +38,14 @@ async def on_message(message):
         else:
             try:
                 if "Bot Admin" in [role.name for role in message.server.roles]:
-                    await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai bisogno di aiuto scrivi il comando !help per una lista di comandi")
+                    await client.send_message(message.channel, "Questo server è già pronto per essere usato.\nSe hai \
+                    bisogno di aiuto scrivi il comando !help per una lista di comandi")
                 else:
                     server = message.server
                     await client.create_role(server, name="Bot Admin")
-                    await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
+                    await client.send_message(message.channel, "Un ruolo di nome Bot Admin è stato creato!\nSe sei il \
+                    creatore del server devi assegnare il ruolo Bot Admin a te stesso e a chi vuoi in modo che possiate \
+                    usare i comandi speciali del bot\nScrivi il comando !help per una lista di comandi")
             except AttributeError:
                 await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
@@ -53,20 +58,31 @@ async def on_message(message):
                 description = "Ecco una lista di comandi che puoi usare con me:", 
                 colour = discord.Color.dark_blue()
             )
-            embed.add_field(name="!setup", value="Serve a preparare il server a essere utilizzato creando il ruolo \"Bot Admin\"\n", inline=False)
+            embed.add_field(name="!setup", value="Serve a preparare il server a essere utilizzato creando \
+            il ruolo \"Bot Admin\"\n", inline=False)
             embed.add_field(name="!help", value="Ormai dovresti saperlo :upside_down:\n", inline=False)
             embed.add_field(name="!cookie", value=":cookie:\n", inline=False)
             embed.add_field(name="!lanciomoneta", value="Testa o Croce?", inline=False)
-            embed.add_field(name="!say *", value="Fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando :speaking_head:\n", inline=False)
-            embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
-            embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
-            embed.add_field(name="!gif", value="Manda una gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso su Giphy (nel caso dovessi inserire un Tag inesistente verrà mostrato un messaggio d'errore)\n", inline=False)
-            embed.add_field(name="!superrole *", value="Cambia il colore di Bot Admin infinitamente, lo puoi fermare con il comando !stop (Ogni volta che il bot verrà aggiornato si fermerà :no_mouth:)", inline=False)
-            embed.add_field(name="!doveatterro", value="Se non sai dove lanciarti ti basterà usare questo comando che ti indicherà un posto casuale per atterrare", inline=False)
-            embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
-            embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
+            embed.add_field(name="!say *", value="Fai dire quello che vuoi al bot scrivendo la frase \
+            da fargli dire dopo il comando :speaking_head:\n", inline=False)
+            embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE \
+            non potrai più tornare indietro!)\n", inline=False)
+            embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", 
+                            inline=False)
+            embed.add_field(name="!gif", value="Manda una gif con il tag che ci scrivi di seguito o ne cerca \
+            una completamente a caso su Giphy (nel caso dovessi inserire un Tag inesistente verrà mostrato \
+            un messaggio d'errore)\n", inline=False)
+            embed.add_field(name="!superrole *", value="Cambia il colore di Bot Admin infinitamente, lo puoi \
+            fermare con il comando !stop (Ogni volta che il bot verrà aggiornato si fermerà :no_mouth:)", inline=False)
+            embed.add_field(name="!doveatterro", value="Se non sai dove lanciarti ti basterà usare questo \
+            comando che ti indicherà un posto casuale per atterrare", inline=False)
+            embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si \
+            usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
+            embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone \
+            che hanno il ruolo \"Bot Admin\"")
             await client.send_message(message.channel, embed=embed)
-            await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttps://andreaerario.pythonanywhere.com/Ro/Help")
+            await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi \
+            visitare il sito \nhttps://andreaerario.pythonanywhere.com/Ro/Help")
     
     if message.content.upper().startswith('!COOKIE'):
         if os.getenv("IDBOT") in [message.author.id]:
@@ -149,10 +165,12 @@ async def on_message(message):
                 )
                 if gif_tag == "":
                     await client.send_message(message.channel, "Sto cercando...")
-                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif',
+                                          content="Ho preso una gif a caso su Giphy")
                 else:
                     await client.send_message(message.channel, "Sto cercando...")
-                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
+                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif',
+                                          content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
             except AttributeError:
                 await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
             except discord.errors.HTTPException:
@@ -169,7 +187,8 @@ async def on_message(message):
                         variabile = True
                         await client.send_message(message.channel, "Il mio Potere scorre nel tuo nome :dragon:")
                     else:
-                        await client.send_message(message.channel, "Il comando è gia attivo... assicurati di avere il ruolo Bot Admin")
+                        await client.send_message(message.channel,
+                                                 "Il comando è gia attivo... assicurati di avere il ruolo Bot Admin")
                 else:
                     await client.send_message(message.channel, "Scusa amico, non hai il permesso")
             except AttributeError:
@@ -231,7 +250,8 @@ async def on_message(message):
             try:
                 if "Bot Admin" in [role.name for role in message.author.roles] or os.getenv("ID") in [message.author.id]:
                     if variabile == False:
-                        await client.send_message(message.channel, "Non puoi fermare un comando non ancora funzionante :upside_down:")
+                        await client.send_message(message.channel, 
+                                                  "Non puoi fermare un comando non ancora funzionante :upside_down:")
                     else:
                         variabile = False
                         await client.send_message(message.channel, "Il mio Potere è stato fermato")
@@ -244,6 +264,16 @@ async def on_message(message):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
         else:
-            await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Sponde del Saccheggio","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
+            await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi",
+                                                                      "Rapide Rischiose","Bosco Blaterante",
+                                                                      "Tempio Tomato","Sponde del Saccheggio",
+                                                                      "Parco Pacifico","Montagnole Maledette",
+                                                                      "Spiagge Snob","Pinnacoli Pendenti",
+                                                                      "Sprofondo Stantio","Corso Commercio",
+                                                                      "Rifugio Ritirato","Borgo Bislacco",
+                                                                      "Condotti Confusi","Boschetto Bisunto",
+                                                                      "Laboratorio della Latrina",
+                                                                      "Approdo Avventurato","Lande Letali",
+                                                                      "Palmeto Paradisiaco"]))   
            
 client.run(os.getenv("TOKEN"))
