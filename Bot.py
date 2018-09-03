@@ -30,6 +30,14 @@ async def on_server_join(server):
 @client.event
 async def on_message(message):
     
+    if message.content.upper().startswith("!ALLSERVER"):
+        if os.getenv("ID") in [message.author.id]:
+            await client.send_message(message.channel, "Ecco la Lista dei Server a cui sono connesso:")
+            for server in client.servers:
+                await client.send_message(message.channel, server.name)
+        else:
+            await client.send_message(message.channel, "Solo il mio padrone può usare questo comando")
+    
     if message.content.upper().startswith("!SETUP"):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
