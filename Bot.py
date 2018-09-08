@@ -151,7 +151,7 @@ async def on_message(message):
         else:
             try:
                 gif_tag = message.content[5:]
-                rgif = g.random(tag=str(gif_tag))
+                rgif = g.random(tag=str(gif_tag), rating="g")
                 response = requests.get(
                     str(rgif.get("data", {}).get('image_original_url')), stream=True
                 )
