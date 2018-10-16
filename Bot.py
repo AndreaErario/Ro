@@ -72,7 +72,7 @@ async def on_message(message):
 	     embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
 	     embed.add_field(name="!superrole *", value="Cambia il colore di Bot Admin infinitamente, lo puoi fermare con il comando !stop (Ogni volta che il bot verrà aggiornato si fermerà :no_mouth:)", inline=False)
 	     embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
-	    embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
+	     embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
             embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
             await client.send_message(message.channel, embed=embed)
             await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttps://andreaerario.pythonanywhere.com/Ro/Help")
