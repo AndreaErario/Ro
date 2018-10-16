@@ -253,5 +253,17 @@ async def on_message(message):
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
         else:
             await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Sponde del Saccheggio","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
-           
+     
+    if message.content.upper().startswith("!TREVERSE"):
+        stringa = message.content[9:]
+        if stringa == "":
+            await client.send_message(message.channel, "Inserisci qualcosa dopo il comando")
+        else:
+            indice = (len(stringa) -1)
+            nuovastringa = ""
+            while indice >= 0:
+	            nuovastringa += stringa[indice]
+	            indice -= 1
+            await client.send_message(message.channel, "{}".format(nuovastringa))
+    
 client.run(os.getenv("TOKEN"))
