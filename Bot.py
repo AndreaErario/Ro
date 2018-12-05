@@ -143,6 +143,8 @@ async def on_message(message):
                     await client.send_message(message.channel, 'Scusa amico, non hai il permesso')
             except AttributeError:
                 await client.send_message(message.channel, "Questo comando funziona solo nei Server")
+            except discord.errors.Forbidden:
+                await client.send_message(message.channel, "Qualcosa non ha funzionato...\nAssicurati che il ruolo Ro-Bot sia il primo nella lista dei ruoli!")
     
     if message.content.upper().startswith("!GIF"):
         if os.getenv("IDBOT") in [message.author.id]:
