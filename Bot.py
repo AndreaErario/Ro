@@ -253,7 +253,7 @@ async def on_message(message):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
         else:
-            await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Sponde del Saccheggio","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
+            await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame","Passatempi Pomposi","Rapide Rischiose","Bosco Blaterante","Tempio Tomato","Bacino Bucato","Parco Pacifico","Montagnole Maledette","Spiagge Snob","Pinnacoli Pendenti","Sprofondo Stantio","Corso Commercio","Rifugio Ritirato","Borgo Bislacco","Condotti Confusi","Boschetto Bisunto","Laboratorio della Latrina","Approdo Avventurato","Lande Letali","Palmeto Paradisiaco"]))   
      
     if message.content.upper().startswith("!REVERSE"):
         if os.getenv("IDBOT") in [message.author.id]:
