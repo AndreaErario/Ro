@@ -27,7 +27,7 @@ async def on_ready():
 async def on_server_join(server):
     await client.send_message(server.owner, "Grazie per avermi aggiunto al tuo Server.\nSe vuoi sfruttarmi al meglio scrivi in un canale testuale del tuo Server il comando !setup che creerà il ruolo Bot Admin automaticamente.\nSe hai bisogno di una lista dei comandi puoi usare il comando !help")    
     me = await client.get_user_info(os.getenv("ID"))
-    await bot.send_message(me, "Sono entrato nel Server {}".format(server.name))
+    await client.send_message(me, "Sono entrato nel Server {}".format(server.name))
     
 @client.event
 async def on_message(message):
