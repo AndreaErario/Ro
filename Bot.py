@@ -38,7 +38,7 @@ async def on_message(message):
             for server in client.servers:
                 await client.send_message(message.channel, "\nServer: {}\nProprietario: {}\n".format(server.name, server.owner))
         else:
-            await client.send_message(message.channel, "Solo il mio padrone può usare questo comando")
+            await client.send_message(message.channel, "Solo il mio creatore può usare questo comando")
     
     if message.content.upper().startswith("!SETUP"):
         if os.getenv("IDBOT") in [message.author.id]:
