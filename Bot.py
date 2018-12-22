@@ -11,6 +11,8 @@ import random
 import safygiphy
 import requests
 import io
+from dotenv import load_dotenv
+load_dotenv()
 
 
 Client = discord.Client()
