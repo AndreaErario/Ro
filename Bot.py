@@ -1,4 +1,4 @@
-#Creato da AndreaErario nel 2018
+# Creato da AndreaErario nel 2018
 
 import discord
 from discord.ext.commands import Bot
@@ -12,6 +12,7 @@ import safygiphy
 import requests
 import io
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -255,7 +256,18 @@ async def on_message(message):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
         else:
-            await client.send_message(message.channel, random.choice(["Crocevia del Ciarpame", "Montagnole Maledette", "Parco Pacifico", "Spiagge Snob", "Pinnacoli Pendenti", "Sponde del Saccheggio", "Condotti Confusi", "Picco Polare", "Rampe Ghiacciate", "Borgallegro", "Approdo Avventurato", "Lande Letali", "Borgo Bislacco", "Sprofondo Stantio", "Corso Commercio", "Tempio Tomato", "Palmeto Paradisiaco", "Rifugio Ritirato", "Bosco Blaterante", "Rapide Rischiose", "Passatempi Pomposi"]))   
+            await client.send_message(message.channel, random.choice([
+                "Crocevia del Ciarpame", "Montagnole Maledette", 
+                "Parco Pacifico", "Spiagge Snob", 
+                "Pinnacoli Pendenti", "Sponde del Saccheggio", 
+                "Condotti Confusi", "Picco Polare", 
+                "Rampe Ghiacciate", "Borgallegro", 
+                "Approdo Avventurato", "Lande Letali", 
+                "Borgo Bislacco", "Sprofondo Stantio", 
+                "Corso Commercio", "Tempio Tomato", 
+                "Palmeto Paradisiaco", "Rifugio Ritirato", 
+                "Bosco Blaterante", "Il Quartiere", 
+                "Passatempi Pomposi"]))   
      
     if message.content.upper().startswith("!REVERSE"):
         if os.getenv("IDBOT") in [message.author.id]:
