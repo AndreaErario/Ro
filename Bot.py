@@ -76,7 +76,7 @@ async def on_message(message):
             embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
             embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
             await client.send_message(message.channel, embed=embed)
-            await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttps://andreaerario.tk/Ro/Help")
+            await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttps://www.andreaerario.tk/Ro/Help")
     
     if message.content.upper().startswith('!COOKIE'):
         if os.getenv("IDBOT") in [message.author.id]:
