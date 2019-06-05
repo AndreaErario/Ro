@@ -8,16 +8,13 @@ import asyncio
 import time
 import os
 import random
-import safygiphy
 import requests
-import io
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
 Client = discord.Client()
-g = safygiphy.Giphy()
 client = commands.Bot(command_prefix="!")
 
 variabile = False
@@ -43,6 +40,7 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, "Solo il mio creatore può usare questo comando")
     
+
     if message.content.upper().startswith("!SETUP"):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
@@ -57,6 +55,7 @@ async def on_message(message):
             except AttributeError:
                 await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
+
     if message.content.upper().startswith("!HELP"):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
@@ -73,11 +72,11 @@ async def on_message(message):
             embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
             embed.add_field(name="!superrole *", value="Cambia il colore di Bot Admin infinitamente, lo puoi fermare con il comando !stop (Ogni volta che il bot verrà aggiornato si fermerà :no_mouth:)", inline=False)
             embed.add_field(name="!leave *", value="Elimina il ruolo \"Bot Admin\" e mi fa uscire dal Server\n", inline=False)
-            embed.add_field(name="Errori", value="Il Bot potrebbe mostrare un messaggio d'errore quando si usa nei messaggi diretti e quando qualcosa non và\n", inline=False)
             embed.set_footer(text="I comandi affiancati da * possono essere usati solamente dalle persone che hanno il ruolo \"Bot Admin\"")
             await client.send_message(message.channel, embed=embed)
             await client.send_message(message.channel, "Se hai bisogno di maggiori informazioni puoi visitare il sito \nhttps://www.andreaerario.tk/Ro/Help")
     
+
     if message.content.upper().startswith('!COOKIE'):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
@@ -87,6 +86,7 @@ async def on_message(message):
             except discord.errors.NotFound:
                 return
     
+
     if message.content.upper().startswith('!SAY'):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
@@ -104,6 +104,7 @@ async def on_message(message):
             except AttributeError:
                 await client.send_message(message.author, "Questo comando funziona solo nei Server")
     
+
     if message.content.upper().startswith("!CLEAR"):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
@@ -149,26 +150,40 @@ async def on_message(message):
             except discord.errors.Forbidden:
                 await client.send_message(message.channel, "Qualcosa non ha funzionato...\nAssicurati che il ruolo Ro-Bot sia il primo nella lista dei ruoli!")
     
+
     if message.content.upper().startswith("!GIF"):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
         else:
             try:
                 gif_tag = message.content[5:]
-                rgif = g.random(tag=str(gif_tag), rating="g")
-                response = requests.get(
-                    str(rgif.get("data", {}).get('image_original_url')), stream=True
-                )
                 if gif_tag == "":
-                    await client.send_message(message.channel, "Sto cercando...")
-                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso su Giphy")
+                    gif = requests.get("https://api.giphy.com/v1/gifs/random?api_key={}&tag=&rating=G".format(os.getenv("GIPHYKEY")))
+                    gif = gif.json()
+                    gif = gif["data"]["image_url"]
+                    await client.send_message(message.channel, f"Ho trovato una gif a caso su Giphy\n{gif}")
                 else:
-                    await client.send_message(message.channel, "Sto cercando...")
-                    await client.send_file(message.channel, io.BytesIO(response.raw.read()), filename='video.gif', content="Ho preso una gif a caso con il tag {} su Giphy".format(gif_tag))
+                    gif = requests.get("https://api.giphy.com/v1/gifs/random?api_key={}&tag={}&rating=G".format(os.getenv("GIPHYKEY"), gif_tag))
+                    gif = gif.json()
+                    gif = gif["data"]["image_url"]
+                    await client.send_message(message.channel, f"Ho trovato una gif a caso con il tag {gif_tag} su Giphy\n{gif}")
             except AttributeError:
                 await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
             except discord.errors.HTTPException:
                 await client.send_message(message.channel, "Non ho trovato nulla :poop:")
+
+
+    if message.content.upper().startswith("!MEME"):
+        if os.getenv("IDBOT") in [message.author.id]:
+            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
+        else:
+            headers = {"User-agent": ""}
+            random_post = requests.get(f"http://www.reddit.com/r/memes/random.json", headers=headers).json()
+            image_url = random_post[0]["data"]["children"][0]["data"]["url"]
+            permalink = random_post[0]["data"]["children"][0]["data"]["permalink"]
+            post_url = f"http://www.reddit.com{permalink}"
+            await client.send_message(message.channel, f"Source:\n{post_url}\nImage:\n{image_url}")
+
 
     if message.content.upper().startswith("!SUPERROLE"):
         if os.getenv("IDBOT") in [message.author.id]:
@@ -251,24 +266,8 @@ async def on_message(message):
                     await client.send_message(message.channel, "Scusa amico, non hai il permesso")
             except AttributeError:
                 await client.send_message(message.channel, "Questo comando funziona solo nei Server")
-    
-    if message.content.upper().startswith("!DOVEATTERRO"):
-        if os.getenv("IDBOT") in [message.author.id]:
-            await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
-        else:
-            await client.send_message(message.channel, random.choice([
-                "Crocevia del Ciarpame", "Montagnole Maledette", 
-                "Parco Pacifico", "Spiagge Snob", 
-                "Pinnacoli Pendenti", "Sponde del Saccheggio", 
-                "Condotti Confusi", "Picco Polare", 
-                "Rampe Ghiacciate", "Borgallegro", 
-                "Approdo Avventurato", "Lande Letali", 
-                "Borgo Bislacco", "Sprofondo Stantio", 
-                "Corso Commercio", "Tempio Tomato", 
-                "Palmeto Paradisiaco", "Rifugio Ritirato", 
-                "Bosco Blaterante", "Il Quartiere", 
-                "Passatempi Pomposi"]))   
-     
+  
+
     if message.content.upper().startswith("!REVERSE"):
         if os.getenv("IDBOT") in [message.author.id]:
             await client.send_message(message.channel, "Perché mai dovrei usare un mio comando :thinking:")
