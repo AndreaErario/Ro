@@ -66,7 +66,7 @@ async def on_message(message):
             embed.add_field(name="!cookie", value=":cookie:\n", inline=False)
             embed.add_field(name="!lanciomoneta", value="Testa o Croce?", inline=False)
             embed.add_field(name="!gif", value="Manda una gif con il tag che ci scrivi di seguito o ne cerca una completamente a caso su Giphy (nel caso dovessi inserire un Tag inesistente verrà mostrato un messaggio d'errore)\n", inline=False)
-            embed.add_field(name="!doveatterro", value="Se non sai dove lanciarti ti basterà usare questo comando che ti indicherà un posto casuale per atterrare", inline=False)
+            embed.add_field(name="!meme", value="Manda una meme random presa da la subreddit r/memes", inline=False)
             embed.add_field(name="!reverse", value="Scrivi qualcosa dopo il comando per farlo scrivere al contrario", inline=False)
             embed.add_field(name="!say *", value="Fai dire quello che vuoi al bot scrivendo la frase da fargli dire dopo il comando :speaking_head:\n", inline=False)
             embed.add_field(name="!clear *", value="Cancella moltissimi messaggi dalla chat \n(ATTENZIONE non potrai più tornare indietro!)\n", inline=False)
