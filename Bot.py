@@ -167,6 +167,8 @@ async def on_message(message):
                     gif = gif.json()
                     gif = gif["data"]["image_url"]
                     await client.send_message(message.channel, f"Ho trovato una gif a caso con il tag {gif_tag} su Giphy\n{gif}")
+            except TypeError:
+                await client.send_message(message.channel, "Sembra che questo tag non esista :thinking:")
             except AttributeError:
                 await client.send_message(message.channel, "Qualcosa non và :neutral_face:")
             except discord.errors.HTTPException:
