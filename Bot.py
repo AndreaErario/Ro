@@ -12,6 +12,14 @@ async def on_ready():
     print("Pronto a partire!")
 
 @client.event
+async def on_guild_join(guild):
+    for channel in guild.text_channels:
+        if channel.name == "general":
+            general = channel
+    if general and general.permissions_for(guild.me).send_messages:
+        await general.send("Sono dentro")
+
+@client.event
 async def on_message(message):
 
     if message.content.upper().startswith("!HELP"):
