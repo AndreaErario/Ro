@@ -17,7 +17,7 @@ async def on_guild_join(guild):
         if channel.name == "general":
             general = channel
     if general and general.permissions_for(guild.me).send_messages:
-        await general.send("Sono dentro")
+        await general.send(f"Grazie per avermi aggiunto in {guild.name}")
 
 @client.event
 async def on_message(message):
