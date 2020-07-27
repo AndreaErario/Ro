@@ -29,29 +29,10 @@ async def on_message(message):
             colour = discord.Color.teal(),
             )
         embed.add_field(name="!help", value="Dovresti averlo capito :smirk:", inline=False)
-        embed.add_field(name="!coronavirus", value="Fornisce i dati globali e italiani sul contagio del coronavirus", inline=False)
         embed.add_field(name="!ciao", value="Un piccolo gesto che mi rende felice :blush:", inline=False)
         embed.add_field(name="!lanciamoneta", value="Lancio una moneta, testa o croce?", inline=False)
         embed.add_field(name="!gif", value="Permettimi di cercare una Gif che possa cambiarti la giornata!", inline=False)
         await  message.channel.send(embed=embed)
-
-    if message.content.upper().startswith("!CORONAVIRUS"):
-        dati_totali = requests.get("https://coronavirus-tracker-api.herokuapp.com/all")
-        dati_totali = dati_totali.json()
-        totale_confermati = dati_totali["confirmed"]["latest"]
-        totale_guariti = dati_totali["recovered"]["latest"]
-        totale_decessi = dati_totali["deaths"]["latest"]
-        confermati_italia = dati_totali["confirmed"]["locations"][16]["latest"]
-        guariti_italia = dati_totali["recovered"]["locations"][16]["latest"]
-        decessi_italia = dati_totali["deaths"]["locations"][16]["latest"]
-        embed = discord.Embed(
-            title = "Coronavirus", 
-            description = "",
-            colour = discord.Color.red(),
-            )
-        embed.add_field(name="Nel mondo", value=f"Totale casi confermati: {totale_confermati}\nGuariti: {totale_guariti}\nDecessi: {totale_decessi}", inline=False)
-        embed.add_field(name="In Italia", value=f"Totale casi confermati: {confermati_italia}\nGuariti: {guariti_italia}\nDecessi: {decessi_italia}", inline=False)
-        await message.channel.send(embed=embed)
 
     if message.content.upper().startswith("!CIAO"):
         await message.channel.send("Ciao :wave:")
